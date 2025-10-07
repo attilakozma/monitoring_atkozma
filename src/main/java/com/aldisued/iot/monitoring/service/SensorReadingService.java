@@ -19,8 +19,18 @@ public class SensorReadingService {
   }
 
   public SensorReading saveSensorReading(SensorReadingDto sensorReadingDto) {
-    //TODO: Task 3
-    return null;
+    // Task 3
+    var sensor = sensorRepository.findById(sensorReadingDto.sensorId());
+    if(sensor.isEmpty()){
+      throw new IllegalArgumentException("Sensor with id " + sensorReadingDto.sensorId() + " not found");
+    }
+
+    var sensorReading = new SensorReading(
+            sensorReadingDto.value(),
+            sensorReadingDto.timestamp(),
+            sensor.get()
+    );
+    return sensorReadingRepository.save(sensorReading);
   }
 
 }

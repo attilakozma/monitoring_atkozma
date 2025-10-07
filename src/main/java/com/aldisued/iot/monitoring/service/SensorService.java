@@ -20,4 +20,9 @@ public class SensorService {
         sensor.type()
     ));
   }
+
+  //Task 4 - unique name check
+  public boolean existsByName(String name){
+    return sensorRepository.existsByName(name);
+  }
 }
